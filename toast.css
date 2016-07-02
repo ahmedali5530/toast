@@ -1,0 +1,32 @@
+.toast{
+    padding : 15px;
+    width: 300px;
+    overflow : hidden;
+    position : fixed;
+    bottom : 15px;
+    left : 15px;
+    background : #333333;
+    max-width: 300px;
+    z-index: 1000;
+    border-radius: 2px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+    color: #ffffff;
+    cursor: pointer;
+    transition: 100ms all linear;
+    display: none;
+}
+
+.toast .toast-text{
+    color : #ffffff;
+    width: 85%;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    line-height: 2;
+}
+.toast .toast-icon{
+    width: 15%;
+    display: inline-block;
+    text-align: right;
+}
+
