@@ -1,4 +1,9 @@
+/*use roboto as default font family*/
+
+@import 'https://fonts.googleapis.com/css?family=Roboto';
+
 .toast{
+    font-family: Roboto;
     padding : 15px;
     width: 300px;
     overflow : hidden;
@@ -17,7 +22,6 @@
 }
 
 .toast .toast-text{
-    color : #ffffff;
     width: 85%;
     display: inline-block;
     float: left;
@@ -28,5 +32,94 @@
     width: 15%;
     display: inline-block;
     text-align: right;
+    font-size: 14px;
+    line-height: 2;
 }
 
+/*color schemes for toast notification*/
+
+.red{
+    background : #F44336;
+}
+
+.pink{
+    background : #E91E63;
+}
+
+.purple{
+    background : #9C27B0;
+}
+
+.deep-purple{
+    background : #673AB7;
+}
+
+.indigo{
+    background : #3F51B5;
+}
+
+.blue{
+    background : #2196F3;
+}
+
+.light-blue{
+    background : #03A9F4;
+}
+
+.cyan{
+    background : #00BCD4;
+}
+
+.teal{
+    background : #009688;
+}
+
+.green{
+    background : #4CAF50;
+}
+
+.light-green{
+    background : #8BC34A;
+}
+
+.lime{
+    background : #CDDC39;
+}
+
+.yellow{
+    background : #FFEB3B;
+}
+
+.amber{
+    background : #FFC107;
+}
+
+.orange{
+    background : #FF9800;
+}
+
+.deep-orange{
+    background : #FF5722;
+}
+
+.brown{
+    background : #795548;
+}
+
+.grey{
+    background : #9E9E9E;
+}
+
+.blue-grey{
+    background : #607D8B;
+}
+
+.black{
+    background : #000000;
+    color : #ffffff;
+}
+
+.white{
+    background : #ffffff;
+    color : #000000;
+}

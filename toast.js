@@ -5,7 +5,23 @@
 var Toast = function(){
     this.selector = document.querySelector('.toast');
     if(this.selector === null){
+        this.create();
+    }else{
+        this.remove().create();
+        //reset classes
+        this.classes = [];
+    }
+}
 
+Toast.prototype = {
+    timeout : 2000,
+    selector : null,
+    classes : [],
+    toastTimeout : null,
+    clickCallback : null,
+    skins : ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey', 'black', 'white'],
+    create : function(){
+        //create new toast from scratch in DOM
         var div = document.createElement('div');
         div.classList.add('toast');
         var toastText = document.createElement('div');
@@ -21,17 +37,12 @@ var Toast = function(){
         document.body.appendChild(div);
 
         this.selector = document.querySelector('.toast');
-    }
-
-    
-}
-
-Toast.prototype = {
-    timeout : 2000,
-    selector : null,
-    classes : [],
-    toastTimeout : null,
-    clickCallback : null,
+    },
+    remove : function(){
+        //remove the toast from DOM
+        this.selector.remove();
+        return this;
+    },
     show : function(text, icon, closeOnClick){
         toast = this;
         //check if toast already shown, hide it, and show it again
@@ -43,12 +54,12 @@ Toast.prototype = {
 
         //set text
         if(typeof text !== 'undefined'){
-            this.selector.children.item('.toast-text').innerText = text;
+            this.selector.children.item(0).innerText = text;
         }
 
         //set icon
         if(typeof icon !== 'undefined'){
-            //this.selector.children.item('.toast-icon').innerText = icon;
+            this.selector.children.item(1).innerText = icon;
         }
 
         //add all custom classes
@@ -68,6 +79,8 @@ Toast.prototype = {
                 toast.hide();
                 if(toast.clickCallback !== null){
                     toast.clickCallback(toast);
+
+                    toast.clickCallback = null;
                 }
             });
         }else if(closeOnClick === false){
@@ -79,10 +92,15 @@ Toast.prototype = {
             this.selector.addEventListener('click', function(){
                 if(toast.clickCallback !== null){
                     toast.clickCallback(toast);
+
+                    toast.clickCallback = null;
                 }
             });
             
         }
+
+        //reset the skin now
+        // this.resetSkin();
     }, 
     hide : function(){
         this.selector.removeEventListener('click', function(){
@@ -107,6 +125,16 @@ Toast.prototype = {
     addClass : function(colorClass){
         this.classes.push(colorClass);
         return this;
+    },
+    skin : function(skin){
+        return this.addClass(skin);
+    },
+    resetSkin : function(){
+        //remove any applied skins, so that other toasts wont be mess up with current toast
+        toast = this;
+        this.skins.forEach(function(skin){
+            toast.selector.classList.remove(skin);
+        });
     },
     click : function(callback){
         if(typeof callback === 'function'){
