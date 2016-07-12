@@ -54,12 +54,12 @@ Toast.prototype = {
 
         //set text
         if(typeof text !== 'undefined'){
-            this.selector.children.item(0).innerText = text;
+            this.selector.children.item(0).innerHTML = text;
         }
 
         //set icon
         if(typeof icon !== 'undefined'){
-            this.selector.children.item(1).innerText = icon;
+            this.selector.children.item(1).innerHTML = icon;
         }
 
         //add all custom classes
