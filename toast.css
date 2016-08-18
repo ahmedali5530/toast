@@ -1,15 +1,16 @@
 /*use roboto as default font family*/
 
-@import 'https://fonts.googleapis.com/css?family=Roboto';
+/*@import 'https://fonts.googleapis.com/css?family=Roboto';*/
 
 .toast{
-    font-family: Roboto;
+    font-family: Roboto-Regular;
     padding : 15px;
     width: 300px;
     overflow : hidden;
     position : fixed;
-    bottom : 15px;
-    left : 15px;
+    bottom : 0;
+    left : 50%;
+    margin-left: -150px;
     background : #333333;
     max-width: 300px;
     z-index: 1000;
