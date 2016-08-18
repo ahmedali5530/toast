@@ -14,7 +14,7 @@ var Toast = function(){
 }
 
 Toast.prototype = {
-    timeout : 2000,
+    timeout : 3000,
     selector : null,
     classes : [],
     toastTimeout : null,
@@ -39,17 +39,17 @@ Toast.prototype = {
         this.selector = document.querySelector('.toast');
     },
     remove : function(){
-        //remove the toast from DOM
+        //removes the toast from DOM
         this.selector.remove();
         return this;
     },
-    show : function(text, icon, closeOnClick){
+    show : function(text, icon, sticky){
         toast = this;
         //check if toast already shown, hide it, and show it again
         if(this.isShown()){
             this.hide();
 
-            this.show(text, icon, closeOnClick);
+            this.show(text, icon, sticky);
         }
 
         //set text
@@ -68,13 +68,19 @@ Toast.prototype = {
         });
 
         this.selector.classList.add('shown');
+        this.selector.classList.add('animated');
+
+        //remove OUT class
+        this.selector.classList.remove('bounceOutDown');
+        
+        //add IN class
         this.selector.classList.add('bounceInUp');
-        this.selector.classList.remove('bounceInDown');
-        this.selector.style.bottom = '15px';
+        
+        // this.selector.style.bottom = '15px';
         this.selector.style.display = 'block';
 
         //set click on close handler
-        if(closeOnClick === true){
+        if(sticky === true){
             this.selector.addEventListener('click', function(){
                 toast.hide();
                 if(toast.clickCallback !== null){
@@ -83,12 +89,12 @@ Toast.prototype = {
                     toast.clickCallback = null;
                 }
             });
-        }else if(closeOnClick === false){
+        }else if(sticky === false){
           
             this.toastTimeout = setTimeout(function(){
                 toast.hide();
             }, this.timeout);
-        }else if(typeof closeOnClick === 'undefined'){
+        }else if(typeof sticky === 'undefined'){
             this.selector.addEventListener('click', function(){
                 if(toast.clickCallback !== null){
                     toast.clickCallback(toast);
@@ -107,10 +113,15 @@ Toast.prototype = {
             return false;
         });
         clearTimeout(this.toastTimeout);
+
         this.selector.classList.remove('shown');
+
+        //remove the IN class
         this.selector.classList.remove('bounceInUp');
-        this.selector.classList.add('bounceInDown');
-        this.selector.style.bottom = '-150px';
+        
+        //add OUT class
+        this.selector.classList.add('bounceOutDown');
+        // this.selector.style.bottom = '-150px';
     },
     isShown : function(){
         return this.selector.classList.contains('shown');
